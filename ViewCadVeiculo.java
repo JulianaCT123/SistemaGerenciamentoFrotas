@@ -42,6 +42,43 @@ public class ViewCadVeiculo {
         } while (!entradaValida);
         return valor;
     }
+    public static void cadastrar() {
+        limparTela();
+        Veiculo novoVeiculo = null;
+        System.out.println("CADASTRAR VEICULO");
+        int tipoVeiculo;
+        do{
+            tipoVeiculo = inputNumerico("carro 1 ou moto 2");
+            if (tipoVeiculo ==1) {
+                novoVeiculo = new Carro();
+            } else if (tipoVeiculo == 2){
+                novoVeiculo = new Moto();
+            }else{
+                System.out.println("Opção");
+            }
+        } while (novoVeiculo == null);
+        System.out.println("informe a marca do veiculo ");
+        String marca = input.nextLine();
+        novoVeiculo.setMarca(marca);
+
+        System.out.println("informe o modelo");
+        novoVeiculo.setModelo(input.nextLine());
+
+        int ano = inputNumerico("informe o ano: ");
+        novoVeiculo.setAno(ano);
+
+        System.out.println("informe a placa: ");
+        String placa = input.nextLine();
+        novoVeiculo.setPlaca(placa);
+        
+
+
+
+
+        
+    }
+
+
 
     public static void main(String[] args) {
         String menu = """
@@ -63,10 +100,11 @@ public class ViewCadVeiculo {
                     System.out.println("VOLTE SEMPRE!!!");
                     break;
                 case 1:
-                    
+
+                    cadastrar();
                     break;
                 case 2:
-                    
+                    listar();    
                     break;
                 case 3:
                     
