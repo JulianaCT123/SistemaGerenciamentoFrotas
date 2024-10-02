@@ -23,8 +23,9 @@ public class ViewCadVeiculo {
         System.out.println("====== Lista de Veiculos ======");
         for (Veiculo veiculo : veiculos) {
             System.out.println(veiculo.toString());
-            System.out.println("----------------");
+            System.out.println("----------------------");
         }
+        aguardarEnter();
     }
 
     private static int inputNumerico(String mensagem) {
@@ -45,14 +46,7 @@ public class ViewCadVeiculo {
 
     private static void removerPorPlaca() {
         limparTela();
-        var veiculos = service.findAll();
-        veiculos.sort(Comparator.comparing(Veiculo::getMarca));
-
-        System.out.println("====== Lista de Veiculos ======");
-        for (Veiculo veiculo : veiculos) {
-            System.out.println(veiculo.toString());
-            System.out.println("----------------");
-        }
+        listar();
         System.out.println("REMOÇÂO DE VEÍCULO");
 
         System.out.println("Infirme a placa do veículo que deseja REMOVER: ");
@@ -63,44 +57,52 @@ public class ViewCadVeiculo {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        aguardarEnter();
     }
+
     public static void cadastrar() {
         limparTela();
         Veiculo novoVeiculo = null;
-        System.out.println("CADASTRAR VEICULO");
+        System.out.println("====== CADASTRAR VEÍCULO ======");
         int tipoVeiculo;
         do{
-            tipoVeiculo = inputNumerico("carro 1 ou moto 2");
-            if (tipoVeiculo ==1) {
+            tipoVeiculo = inputNumerico("Qual tipo de veículo: (1) Carro - (2) Moto ");
+            if (tipoVeiculo == 1 ) {
                 novoVeiculo = new Carro();
             } else if (tipoVeiculo == 2){
                 novoVeiculo = new Moto();
             }else{
-                System.out.println("Opção");
+                System.out.println("Opção Invalida!");
             }
         } while (novoVeiculo == null);
-        System.out.println("informe a marca do veiculo ");
+        System.out.print("Informe a marca: ");
         String marca = input.nextLine();
         novoVeiculo.setMarca(marca);
 
-        System.out.println("informe o modelo");
+        System.out.print("Informe o modelo: ");
         novoVeiculo.setModelo(input.nextLine());
 
-        int ano = inputNumerico("informe o ano: ");
+        int ano = inputNumerico("Informe o ano: ");
         novoVeiculo.setAno(ano);
 
-        System.out.println("informe a placa: ");
+        System.out.print("Informe a placa: ");
         String placa = input.nextLine();
         novoVeiculo.setPlaca(placa);
         
+        if (tipoVeiculo == 1) {
+            // adicionar
+        } else if (tipoVeiculo == 2) {
+            // adicionar
+        }
 
+        service.save(novoVeiculo);
 
-
-
-        
+        aguardarEnter();
     }
 
-
+    public static void pesquisarPorPlaca () {
+        // adicionar
+    }
 
     public static void main(String[] args) {
         String menu = """
@@ -111,8 +113,8 @@ public class ViewCadVeiculo {
                 3 - Pesquisar Veículo pela placa;
                 4 - Remover Veículo;
                 0 - Sair;
-                Digite a opção desejada:
-                """;
+
+                Digite a opção desejada: """;
         int opcao;
         do {
             limparTela();
@@ -122,19 +124,16 @@ public class ViewCadVeiculo {
                     System.out.println("VOLTE SEMPRE!!!");
                     break;
                 case 1:
-
-
                     cadastrar();
                     break;
                 case 2:
-
                     listar();    
                     break;
                 case 3:
-
+                    pesquisarPorPlaca();
                     break;
                 case 4:
-
+                    removerPorPlaca();
                     break;
                 default:
                     System.out.println("Opção Inválida!!!");

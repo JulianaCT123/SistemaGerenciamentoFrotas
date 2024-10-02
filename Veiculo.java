@@ -1,4 +1,4 @@
-public class Veiculo {
+public abstract class Veiculo {
     private String marca;
     private String modelo;
     private int ano;
@@ -31,8 +31,9 @@ public class Veiculo {
 
     public String toString() {
         String descricao = "Marca: " + this.getMarca()
-                            + "Ano: " + this.getAno()
-                            + "Placa: " + this.getPlaca();
+                            + "\nModelo: " + this.getModelo()
+                            + "\nAno: " + this.getAno()
+                            + "\nPlaca: " + this.getPlaca();
         return descricao;
     }
     

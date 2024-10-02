@@ -9,4 +9,8 @@ public class Moto extends Veiculo{
         this.partidaEletrica = partidaEletrica;
     }
     
+    public String toString() {
+        String descricao = super.toString();
+        return descricao + "\nPartida Eletrica: " + this.isPartidaEletrica();
+    }
 }

@@ -9,4 +9,8 @@ public class Carro extends Veiculo{
         this.numeroPortas = numeroPortas;
     }
     
+    public String toString() {
+        String descricao = super.toString();
+        return descricao + "\nNumero de portas: " + this.getNumeroPortas();
+    }
 }
