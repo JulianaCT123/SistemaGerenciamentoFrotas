@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class ViewCadVeiculo {
@@ -12,6 +13,18 @@ public class ViewCadVeiculo {
     public static void aguardarEnter() {
         System.out.print("Pressione Enter para continuar...");
         input.nextLine();
+    }
+
+    public static void listar() {
+        limparTela();
+        var veiculos = service.findAll();
+        veiculos.sort(Comparator.comparing(Veiculo:: getMarca));
+
+        System.out.println("====== Lista de Veiculos ======");
+        for (Veiculo veiculo : veiculos) {
+            System.out.println(veiculo.toString());
+            System.out.println("----------------");
+        }
     }
 
     private static int inputNumerico(String mensagem) {

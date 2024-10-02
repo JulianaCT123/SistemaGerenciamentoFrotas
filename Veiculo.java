@@ -28,5 +28,12 @@ public class Veiculo {
     public void setPlaca(String placa) {
         this.placa = placa;
     }
+
+    public String toString() {
+        String descricao = "Marca: " + this.getMarca()
+                            + "Ano: " + this.getAno()
+                            + "Placa: " + this.getPlaca();
+        return descricao;
+    }
     
 }
