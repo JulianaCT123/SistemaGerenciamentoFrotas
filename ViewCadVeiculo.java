@@ -99,12 +99,7 @@ public class ViewCadVeiculo {
             }else if (partidaEletica == 2)
             ((Moto)novoVeiculo).setPartidaEletrica(false);
         }
-        try{
-            service.cadastrar(novoVeiculo);
-            System.out.println("Veiculo adicionado com SUCESSO!");
-        }catch (Exception e){
-            System.out.println("ERRO: "+ e.getMessage());
-        }
+        service.save(novoVeiculo);
         aguardarEnter();
     }
 
