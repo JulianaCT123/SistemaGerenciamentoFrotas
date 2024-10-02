@@ -18,7 +18,7 @@ public class ViewCadVeiculo {
     public static void listar() {
         limparTela();
         var veiculos = service.findAll();
-        veiculos.sort(Comparator.comparing(Veiculo:: getMarca));
+        veiculos.sort(Comparator.comparing(Veiculo::getMarca));
 
         System.out.println("====== Lista de Veiculos ======");
         for (Veiculo veiculo : veiculos) {
@@ -41,6 +41,28 @@ public class ViewCadVeiculo {
             }
         } while (!entradaValida);
         return valor;
+    }
+
+    private static void removerPorPlaca() {
+        limparTela();
+        var veiculos = service.findAll();
+        veiculos.sort(Comparator.comparing(Veiculo::getMarca));
+
+        System.out.println("====== Lista de Veiculos ======");
+        for (Veiculo veiculo : veiculos) {
+            System.out.println(veiculo.toString());
+            System.out.println("----------------");
+        }
+        System.out.println("REMOÇÂO DE VEÍCULO");
+
+        System.out.println("Infirme a placa do veículo que deseja REMOVER: ");
+        String placa = input.nextLine();
+        try {
+            service.removerPorPlaca(placa);
+            System.out.println("Veículo removido!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     public static void cadastrar() {
         limparTela();
@@ -89,7 +111,7 @@ public class ViewCadVeiculo {
                 3 - Pesquisar Veículo pela placa;
                 4 - Remover Veículo;
                 0 - Sair;
-                Digite a opção desejada:  
+                Digite a opção desejada:
                 """;
         int opcao;
         do {
@@ -101,16 +123,18 @@ public class ViewCadVeiculo {
                     break;
                 case 1:
 
+
                     cadastrar();
                     break;
                 case 2:
+
                     listar();    
                     break;
                 case 3:
-                    
+
                     break;
                 case 4:
-                    
+
                     break;
                 default:
                     System.out.println("Opção Inválida!!!");
@@ -119,4 +143,5 @@ public class ViewCadVeiculo {
             }
         } while (opcao != 0);
     }
+
 }

@@ -26,4 +26,16 @@ public class ServiceVeiculo {
             throw new Exception("Veículo não encontrado com a placa informada");
         return veiculoRet;
     }
+    public void removerPorPlaca(String placa) throws Exception{
+        boolean veiculoRemovido = false;
+        for (Veiculo veiculo : frota) {
+            if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
+                veiculoRemovido = true;
+                frota.remove(veiculo);
+                break;
+            }
+        }
+        if (!veiculoRemovido)
+            throw new Exception("Livro não encontrado com este título");
+    }
 }
