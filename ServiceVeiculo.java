@@ -38,4 +38,6 @@ public class ServiceVeiculo {
         if (!veiculoRemovido)
             throw new Exception("Livro não encontrado com este título");
     }
+
+    
 }

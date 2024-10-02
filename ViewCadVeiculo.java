@@ -92,12 +92,24 @@ public class ViewCadVeiculo {
         System.out.println("informe a placa: ");
         String placa = input.nextLine();
         novoVeiculo.setPlaca(placa);
-        
-
-
-
-
-        
+         
+        if(tipoVeiculo == 1){
+            int portasCarro = inputNumerico("informe o numero de porta:");
+            ((Carro)novoVeiculo).setNumeroPortas(portasCarro);
+        }else if (tipoVeiculo == 2){
+            int partidaEletica = inputNumerico("Possui partida eletrica: SIM(1) NÃO(2)");
+            if (partidaEletica == 1) {
+            ((Moto)novoVeiculo).setPartidaEletrica(true);
+            }else if (partidaEletica == 2)
+            ((Moto)novoVeiculo).setPartidaEletrica(false);
+        }
+        try{
+            service.cadastrar(novoVeiculo);
+            System.out.println("Veiculo adicionado com SUCESSO!");
+        }catch (Exception e){
+            System.out.println("ERRO: "+ e.getMessage());
+        }
+        aguardarEnter();
     }
 
 
