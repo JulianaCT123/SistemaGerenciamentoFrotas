@@ -103,8 +103,26 @@ public class ViewCadVeiculo {
         aguardarEnter();
     }
 
-    public static void pesquisarPorPlaca () {
-        // adicionar
+    public static void pesquisarPorPlaca() {
+        limparTela();
+        System.out.println("===== PESQUISAR VEÍCULO POR PLACA =====");
+
+        System.out.print("Informe a Placa do Veículo: ");
+            String placa = input.nextLine();
+
+        try {
+            Veiculo veiculo = service.findByPlaca(placa);
+            if (veiculo != null) {
+                System.out.println("Veículo Encontrado! ");
+                System.out.println(veiculo.toString());
+            } 
+            else {
+                System.out.println("Veículo não Encontrado com a Placa: " + placa);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao Pesquisar Veículo! " + e.getMessage());
+        }
+        aguardarEnter();
     }
 
     public static void main(String[] args) {
