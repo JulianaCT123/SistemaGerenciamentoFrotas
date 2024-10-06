@@ -1,6 +1,10 @@
 public class Moto extends Veiculo{
     private boolean partidaEletrica;
 
+    public String getTipo() {
+        return "MOTO";
+    }
+
     public boolean isPartidaEletrica() {
         return partidaEletrica;
     }
@@ -11,6 +15,11 @@ public class Moto extends Veiculo{
     
     public String toString() {
         String descricao = super.toString();
-        return descricao + "\nPartida Eletrica: " + this.isPartidaEletrica();
+        String partida;
+        if (this.partidaEletrica)
+            partida = "Sim";
+        else 
+            partida = "Não";
+        return descricao + "\nPartida Eletrica: " + partida;
     }
 }

@@ -4,6 +4,8 @@ public abstract class Veiculo {
     private int ano;
     private String placa;
 
+    public abstract String getTipo();
+
     public String getMarca() {
         return marca;
     }

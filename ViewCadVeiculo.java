@@ -22,6 +22,7 @@ public class ViewCadVeiculo {
 
         System.out.println("====== Lista de Veiculos ======");
         for (Veiculo veiculo : veiculos) {
+            System.out.println(veiculo.getTipo());
             System.out.println(veiculo.toString());
             System.out.println("----------------------");
         }
@@ -66,7 +67,7 @@ public class ViewCadVeiculo {
         System.out.println("====== CADASTRAR VEÍCULO ======");
         int tipoVeiculo;
         do{
-            tipoVeiculo = inputNumerico("Qual tipo de veículo: (1) Carro - (2) Moto ");
+            tipoVeiculo = inputNumerico("Qual tipo de veículo: (1) Carro - (2) Moto \n");
             if (tipoVeiculo == 1 ) {
                 novoVeiculo = new Carro();
             } else if (tipoVeiculo == 2){
@@ -99,7 +100,15 @@ public class ViewCadVeiculo {
             }else if (partidaEletica == 2)
             ((Moto)novoVeiculo).setPartidaEletrica(false);
         }
-        service.save(novoVeiculo);
+        
+        try {
+            service.save(novoVeiculo);
+            System.out.println("Veículo cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("NÃO FOI POSSIVEL CADASTRAR O VEÍCULO");
+            System.out.println(e.getMessage());
+        }
+
         aguardarEnter();
     }
 
@@ -128,6 +137,7 @@ public class ViewCadVeiculo {
     public static void main(String[] args) {
         String menu = """
                 SISTEMA DE GERENCIAMENTO DE FROTAS
+                
                 Menu de Opções:
                 1 - Cadastrar novo Veículo;
                 2 - Listar todos Veículos cadastrados;
