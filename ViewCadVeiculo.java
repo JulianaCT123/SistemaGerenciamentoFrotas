@@ -19,12 +19,12 @@ public class ViewCadVeiculo {
         limparTela();
         var veiculos = service.findAll();
         veiculos.sort(Comparator.comparing(Veiculo::getMarca));
-
+        int i = 1;
         System.out.println("====== Lista de Veiculos ======");
-        for (Veiculo veiculo : veiculos) {
-            System.out.println(veiculo.getTipo());
-            System.out.println(veiculo.toString());
+        for (Veiculo veiculo : veiculos) {   
+            System.out.println("Veiculo " + i + " - " + veiculo.toString());
             System.out.println("----------------------");
+            i++;
         }
         aguardarEnter();
     }
@@ -50,7 +50,7 @@ public class ViewCadVeiculo {
         listar();
         System.out.println("REMOÇÂO DE VEÍCULO");
 
-        System.out.println("Infirme a placa do veículo que deseja REMOVER: ");
+        System.out.print("Infirme a placa do veículo que deseja REMOVER: ");
         String placa = input.nextLine();
         try {
             service.removerPorPlaca(placa);
@@ -67,7 +67,11 @@ public class ViewCadVeiculo {
         System.out.println("====== CADASTRAR VEÍCULO ======");
         int tipoVeiculo;
         do{
-            tipoVeiculo = inputNumerico("Qual tipo de veículo: (1) Carro - (2) Moto \n");
+            tipoVeiculo = inputNumerico("""
+                Qual tipo de veículo: 
+                (1) Carro 
+                (2) Moto 
+                """);
             if (tipoVeiculo == 1 ) {
                 novoVeiculo = new Carro();
             } else if (tipoVeiculo == 2){
@@ -91,10 +95,15 @@ public class ViewCadVeiculo {
         novoVeiculo.setPlaca(placa);
          
         if(tipoVeiculo == 1){
-            int portasCarro = inputNumerico("informe o numero de porta:");
+            int portasCarro;
+            do {
+                portasCarro = inputNumerico("informe o número de porta: ");
+                if (portasCarro == 0)
+                    System.out.println("O número de portas deve ser diferente de 0");
+            }while(portasCarro == 0);
             ((Carro)novoVeiculo).setNumeroPortas(portasCarro);
         }else if (tipoVeiculo == 2){
-            int partidaEletica = inputNumerico("Possui partida eletrica: SIM(1) NÃO(2)");
+            int partidaEletica = inputNumerico("Possui partida eletrica: SIM(1) NÃO(2) ");
             if (partidaEletica == 1) {
             ((Moto)novoVeiculo).setPartidaEletrica(true);
             }else if (partidaEletica == 2)
@@ -103,8 +112,10 @@ public class ViewCadVeiculo {
         
         try {
             service.save(novoVeiculo);
+            System.out.println("");
             System.out.println("Veículo cadastrado com sucesso!");
         } catch (Exception e) {
+            System.out.println("");
             System.out.println("NÃO FOI POSSIVEL CADASTRAR O VEÍCULO");
             System.out.println(e.getMessage());
         }
@@ -145,7 +156,8 @@ public class ViewCadVeiculo {
                 4 - Remover Veículo;
                 0 - Sair;
 
-                Digite a opção desejada: """;
+                Digite a opção desejada: 
+                """;
         int opcao;
         do {
             limparTela();

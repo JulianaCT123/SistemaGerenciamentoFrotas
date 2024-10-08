@@ -32,10 +32,7 @@ public abstract class Veiculo {
     }
 
     public String toString() {
-        String descricao = "Marca: " + this.getMarca()
-                            + "\nModelo: " + this.getModelo()
-                            + "\nAno: " + this.getAno()
-                            + "\nPlaca: " + this.getPlaca();
+        String descricao = "Tipo: " + this.getTipo() + " - " + this.getMarca() + this.getModelo() +  this.getAno() + " - Placa: " + this.getPlaca();
         return descricao;
     }
     
